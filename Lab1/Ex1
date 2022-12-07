@@ -1,0 +1,18 @@
+#include <stdio.h>
+ int main() {
+ 	int *p;
+ 	int var = 5;
+ 	p = &var;
+ 	
+ 	printf ("*p = %d\n", *p);
+ 	
+ 	var = 10;
+ 	printf ("*p = %d\n", *p);
+ 	
+ 	*p = 15;
+ 	printf ("*p = %d\n", *p);
+ 	printf ("var = %d\n", var);
+ 	
+ 	return 0;
+ 	
+ }
