@@ -1,0 +1,13 @@
+#include <stdio.h>
+void GetText(char *text);
+int main() {
+  char str[20];
+  printf ("Enter a Text :");
+  gets(str); 
+  GetText(str);
+  return 0;
+}
+
+void GetText(char *text) { 
+    printf ("The passed Text is : %s",text);
+    }
