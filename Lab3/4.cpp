@@ -1,24 +1,29 @@
 #include <stdio.h>
 #include <string.h>
 
-struct Book {
-    char title[20];
-	char author[20];
-	char subject[40];	
+struct customer {
+	char name[20];
+	int age;
+	int member;
 };//end loop
-void text(struct Book *bo);
+
 int main(){
-	struct  Book b;
-	text(&b);
-	printf("%s\n ",b.title);
-	printf("by %s\n",b.author);
-	printf("subject is %s",b.subject);
-}
-void text(struct Book *bo) {
-	printf("I read");
-	gets(bo->title);
-	printf("who is composed");
-	gets(bo->author);
-	printf("what is subject");
-	gets(bo->subject);
-}
+	int n;
+	struct customer *oldman;
+	oldman = new struct customer;
+	printf("How many customer");
+	scanf("%d",&n);
+	for ( int i =0; i<n; i++){
+		printf("oldman %d : name,age,member:",i);
+		scanf("%s %d %d", oldman[i].name,
+						 &oldman[i].age,	
+						 &oldman[i].member);
+	}//end loop for
+	for ( int i =0; i<n; i++){
+		printf("\nCustomer[%d]: \n",i);
+		printf("name: %s\n",oldman[i].name);
+		printf("age: %d\n",oldman[i].age);
+		printf("member: %d\n",oldman[i].member);
+	}//end loop
+	return 0;
+}//end loop
