@@ -1,25 +1,24 @@
 #include <stdio.h>
 #include <string.h>
 
-struct customer {
-	char name[20];
-	int age;
-	int member;
+struct Car {
+	char model[20];
+	int year;
+	int price;
 };//end loop
-
+void addNum( struct Car c );
 int main(){
-	struct customer oldman[5];
-	for ( int i =1; i<5; i++){
-		printf("oldman %d : name,age,member:",i);
-		scanf("%s %d %d", oldman[i].name,
-						 &oldman[i].age,	
-						 &oldman[i].member);
-	}//end loop for
-	for ( int i =1; i<5; i++){
-		printf("\nCustomer[%d]: \n",i);
-		printf("name: %s\n",oldman[i].name);
-		printf("age: %d\n",oldman[i].age);
-		printf("member: %d\n",oldman[i].member);
-	}//end loop
+	struct Car c1,*c;
+	strcpy (c1.model,"ORA Good Cat");
+    c1.year =2022;
+	c1.price = 989000;
+	c = &c1;
+	addNum(c1);
 	return 0;
+}//end loop
+void addNum(struct Car c) {
+	printf("model: %s\n ",c.model);
+	printf("year: %d\n ",c.year);
+	printf("price: %d\n",c.price);
+	printf("sale: %d",c.sale);
 }//end loop
