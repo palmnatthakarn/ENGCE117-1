@@ -2,46 +2,67 @@
 #include <string.h>
 
 struct studentNode {
- char name[ 20 ] ;
- int age ;
- char sex ;
- float gpa ;
- struct studentNode *next ;
-} ;
+    char name[20];
+    int age;
+    char sex;
+    float gpa;
+    struct studentNode *next;
+};
 
-void SaveNode( struct studentNode *child, char n[], int a, char s, float g ) ;
-void GoNext2( struct studentNode ***walk ) ;
+struct studentNode *AddNode( struct studentNode **startNode, char n[], int a, char s, float g );
+void InsNode( struct studentNode *preNode, char n[], int a, char s, float g );
+void DelNode( struct studentNode *preNode );
+void ShowAll( struct studentNode *walk );
 
-int main() {
- struct studentNode *start, *now1, **now2 ;
- start = new struct studentNode ;
- SaveNode( start, "one", 6, 'M', 3.11 ) ;
- 
- start->next = new struct studentNode ;
- SaveNode( start->next, "two", 8, 'F', 3.22 ) ;
- 
- start->next->next = new struct studentNode ;
- SaveNode( start->next->next, "three", 10, 'M', 3.33 ) ;
+int main(){
+    struct studentNode *start, *now;
+    start = NULL;
+    now = AddNode(&start, "one", 6, 'M', 3.11); ShowAll(start);
+    now = AddNode(&start, "two", 8, 'F', 3.22); ShowAll(start);
+    InsNode(now, "three", 10, 'M', 3.33); ShowAll(start);
+    InsNode(now, "four", 12, 'F', 3.44); ShowAll(start);
+    DelNode(now); ShowAll(start);
+    return 0;
+} // end function
 
- start->next->next->next = new struct studentNode ;
- SaveNode( start->next->next->next, "four", 12, 'F', 3.44 ) ;
+void ShowAll( struct studentNode *walk ){
+    while (walk != NULL){
+        printf("%s ", walk->name);
+        walk = walk->next;
+    } // end while
+    printf(" ");
+} // end function
 
- now1 = start ;
- now2 = &start ;
+struct studentNode *AddNode( struct studentNode **startNode, char n[], int a, char s, float g ){
+    struct studentNode *newNode = new studentNode;
+    strcpy(newNode->name, n);
+    newNode->age = a;
+    newNode->sex = s;
+    newNode->gpa = g;
+    newNode->next = NULL;
+    newNode->next = (*startNode);
+    if (*startNode == NULL){
+        *startNode = newNode;
+    } 
+    else{
+        newNode->next = *startNode;
+        *startNode = newNode;
+    }
+    return newNode;
+} // end function
 
- GoNext2( &now2 ) ;
- printf( "%s ", (*now2)->name ) ;
+void InsNode( struct studentNode *preNode, char n[], int a, char s, float g ){
+    struct studentNode *newNode = new studentNode;
+    strcpy(newNode->name, n);
+    newNode->age = a;
+    newNode->sex = s;
+    newNode->gpa = g;
+    newNode->next = preNode->next;
+    preNode->next = newNode;
+} // end function
 
- return 0 ;
-}//end function
+void DelNode( struct studentNode *preNode ){
+    struct studentNode *delNode = preNode->next;
+    preNode->next = delNode->next;
+} // end function
 
-void SaveNode( struct studentNode *child, char n[], int a, char s, float g ) {
- strcpy( child->name, n ) ;
- child->age = a ;
- child->sex = s ;
- child->gpa = g ;
-}//end function
-
-void GoNext2( struct studentNode ***walk ) {
-	**walk = (**walk)->next;
-}
